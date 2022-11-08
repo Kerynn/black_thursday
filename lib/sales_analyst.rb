@@ -137,19 +137,22 @@ class SalesAnalyst
     invoices_by_day
   end
 
-  def top_days_by_invoice_count
-    invoices_by_weekday = invoices_by_day
-    invoice_average_per_day = (invoices_by_weekday.values.sum.to_f / invoices_by_day.values.count).round(2)
-    diff_sum = invoices_by_weekday.values.map { |invoices| (invoice_average_per_day - invoices)**2}.sum
-    invoice_stdrd_dev = Math.sqrt((diff_sum.to_f / invoices_by_weekday.values.count).abs).round(2)
+  def find_top_days(hash, threshold)
     days = []
-    threshold = invoice_average_per_day + invoice_stdrd_dev
-    invoices_by_day.each do |day, invoices|
+    hash.each do |day, invoices|
       if (invoices > threshold.round)
         days.push(num_to_weekday(day))
       end
     end
     days
+  end
+
+  def top_days_by_invoice_count
+    invoices_by_weekday = invoices_by_day
+    invoice_average_per_day = (invoices_by_weekday.values.sum.to_f / invoices_by_day.values.count).round(2)
+    diff_sum = invoices_by_weekday.values.map { |invoices| (invoice_average_per_day - invoices)**2}.sum
+    invoice_stdrd_dev = Math.sqrt((diff_sum.to_f / invoices_by_weekday.values.count).abs).round(2)
+    days = find_top_days(invoices_by_weekday, invoice_average_per_day + invoice_stdrd_dev)
   end
 
   def invoice_status(status)
