@@ -32,7 +32,7 @@ RSpec.describe InvoiceItemRepository do
               })}
   let (:invoice_items) {[ii_1, ii_2, ii_3]}
   let (:invoice_item_repository) {InvoiceItemRepository.new(invoice_items)}
-  
+
   describe '#initialize' do
     it 'exists' do
       expect(invoice_item_repository).to be_a(InvoiceItemRepository)
@@ -109,10 +109,10 @@ RSpec.describe InvoiceItemRepository do
       expect(invoice_item_repository.all.include?(ii_2)).to eq(false)
     end
   end
-  
+
   describe '#find_all_by_date'do
     it '#find_all_by_date returns items sold on the given date' do
-      expect(invoice_item_repository.find_all_by_date("2022-11-07")).to eq([ii_1, ii_2, ii_3])
+      expect(invoice_item_repository.find_all_by_date(Time.now.to_s.split(" ")[0])).to eq([ii_1, ii_2, ii_3])
     end
   end
 end

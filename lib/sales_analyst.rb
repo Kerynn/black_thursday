@@ -174,16 +174,20 @@ class SalesAnalyst
 
 
   def merchants_with_pending_invoices
-    invoices_pending = @transactions.all.find_all do |transaction|
-      invoice_paid_in_full?(transaction.id) == false
+    invoices_pending = []
+    @invoices.all.each do |invoice|
+      transaction_results = @transactions.find_all_by_invoice_id(invoice.id)
+      transaction_results = transaction_results.map { |transaction| transaction.result}
+      if !transaction_results.any?(:success)
+        invoices_pending.push(@merchants.find_by_id(invoice.merchant_id))
+      end
     end
-    invoices_pending
+    invoices_pending.uniq
   end
 
   def merchants_with_only_one_item
     single_item_merchant = @merchants.all.find_all do |merchant|
       items_per_merchant(merchant.id) == 1
     end
-
   end
 end
