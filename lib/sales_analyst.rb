@@ -222,5 +222,15 @@ class SalesAnalyst
      items_per_merchant(merchant.id) == 1
    end
  end
- 
+
+  def revenue_by_merchant(id)
+    merchant_invoices = @invoices.find_all_by_merchant_id(id) 
+    total = 0
+    merchant_invoices.each do |invoice|
+      if invoice_paid_in_full?(invoice.id)
+        total += invoice_total(invoice.id)
+      end 
+    end 
+    total
+  end 
 end

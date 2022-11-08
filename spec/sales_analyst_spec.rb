@@ -224,5 +224,8 @@ RSpec.describe SalesAnalyst do
        expect(sales_analyst.merchants_with_only_one_item_registered_in_month("November")).to eq([merchant_1])
      end
      
-   end
+    it 'will return the total revenue for a single merchant' do 
+      expect(sales_analyst.revenue_by_merchant(1)).to eq(BigDecimal(392.7,4))
+   end 
+  end
 end
