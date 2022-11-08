@@ -170,6 +170,12 @@ class SalesAnalyst
     end
   end
 
+  def invoice_total(invoice_id)
+    total_prices = @invoice_items.find_all_by_invoice_id(invoice_id).map do |invoice_item|
+      invoice_item.unit_price * invoice_item.quantity
+    end
+    total_prices.sum
+  end
 
   def merchants_with_pending_invoices
     invoices_pending = []
@@ -216,6 +222,4 @@ class SalesAnalyst
    one_item_merchants_ids = all_merchant_ids.select{|i| all_merchant_ids.count(i) == 1}
    one_item_merchants_ids.map {|id| @merchants.find_by_id(id)}
  end
-
-
 end

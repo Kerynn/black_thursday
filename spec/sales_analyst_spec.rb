@@ -200,6 +200,12 @@ RSpec.describe SalesAnalyst do
       expect(sales_analyst.invoice_paid_in_full?(3)).to eq(false)
     end
 
+    it '#invoice_total returns the total $ of the invoice' do
+      expect(sales_analyst.invoice_total(1)).to eq(5 * BigDecimal(78.54,4))
+      expect(sales_analyst.invoice_total(2)).to eq(4 * BigDecimal(22.24,4))
+      expect(sales_analyst.invoice_total(3)).to eq(6 * BigDecimal(32.44,4))
+    end
+
     it '#merchants_with_pending_invoices returns merchants with pending invoices' do
       expect(sales_analyst.merchants_with_pending_invoices).to eq([merchant_1, merchant_2])
     end
