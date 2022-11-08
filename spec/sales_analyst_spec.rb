@@ -208,4 +208,10 @@ RSpec.describe SalesAnalyst do
       expect(sales_analyst.merchants_with_only_one_item).to eq([merchant_1])
     end
   end
+
+  describe 'iteration 4' do
+    it '#total_revenue_by_date' do
+      expect(sales_analyst.total_revenue_by_date("2022-11-07")).to eq(133.22)
+    end
+  end
 end
