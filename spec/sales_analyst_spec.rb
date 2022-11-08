@@ -278,9 +278,13 @@ RSpec.describe SalesAnalyst do
         :merchant_id => 2})}
      let (:items) {[item_1, item_2, item_3]}
      let (:item_repo) {ItemRepository.new(items)}
-     it 'will return array of merchants registered in that month' do
+    it 'will return array of merchants registered in that month' do
        expect(sales_analyst.merchants_with_only_one_item_registered_in_month("November")).to eq([merchant_1])
      end
    end
+
+    it 'will return the total revenue for a single merchant' do 
+      expect(sales_analyst.revenue_by_merchant(2)).to eq(BigDecimal(110.98,4))
+   end 
   end
 end

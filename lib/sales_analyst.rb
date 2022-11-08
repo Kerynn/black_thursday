@@ -222,4 +222,6 @@ class SalesAnalyst
    one_item_merchants_ids = all_merchant_ids.select{|i| all_merchant_ids.count(i) == 1}
    one_item_merchants_ids.map {|id| @merchants.find_by_id(id)}
  end
+
+  def revenue_by_merchant
 end
