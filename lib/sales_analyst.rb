@@ -44,9 +44,7 @@ class SalesAnalyst
     end
     average = average_items_per_merchant
     differences = 0
-    merchants.map do |num|
-      differences += (num - average)**2
-    end
+    merchants.each { |num| differences += (num - average)**2 }
     Math.sqrt(differences / (merchants.count - 1).to_f).round(2)
   end
 
