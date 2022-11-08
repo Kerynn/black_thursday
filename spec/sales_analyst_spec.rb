@@ -153,6 +153,12 @@ RSpec.describe SalesAnalyst do
       expect(sales_analyst.bottom_merchants_by_invoice_count).to eq([])
     end
 
+    it '#num_to_weekday returns a string representing a weekday' do
+      expect(sales_analyst.num_to_weekday(0)).to eq("Sunday")
+      expect(sales_analyst.num_to_weekday(6)).to eq("Saturday")
+      expect(sales_analyst.num_to_weekday(7)).to eq(nil)
+    end
+
     it '#top_days_by_invoice_count returns and array of days one standard deviation above the mean' do
       expect(sales_analyst.top_days_by_invoice_count).to eq([])
     end
