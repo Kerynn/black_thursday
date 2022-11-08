@@ -220,67 +220,8 @@ RSpec.describe SalesAnalyst do
       expect(sales_analyst.total_revenue_by_date(Time.now.to_s.split(" ")[0])).to eq(133.22)
     end
 
-    it "merchants_with_only_one_item_registered_in_month" do
-     let (:item_1) {Item.new({:id => 1,
-       :name => "Shoes",
-       :description => "left shoe, right shoe",
-       :unit_price => BigDecimal(78.54,4),
-       :created_at => Time.now,
-       :updated_at => Time.now,
-       :merchant_id => 1})}
-     let (:item_2) {Item.new({:id => 2,
-        :name => "Cool hat",
-        :description => "black top hat",
-        :unit_price => BigDecimal(22.24,4),
-        :created_at => Time.now,
-        :updated_at => Time.now,
-        :merchant_id => 2})}
-     let (:item_3) {Item.new({:id => 3,
-        :name => "More Expensive Cool hat",
-        :description => "black top hat",
-        :unit_price => BigDecimal(312.44,4),
-        :created_at => Time.now,
-        :updated_at => Time.now,
-        :merchant_id => 2})}
-     let (:items) {[item_1, item_2, item_3]}
-     let (:item_repo) {ItemRepository.new(items)}
-     let (:merchant_1) {Merchant.new({:id => 1,
-                 :name => "Nike",
-                 :created_at => Time.now,
-                 :updated_at => Time.now})}
-     let (:merchant_2) {Merchant.new({:id => 2,
-                 :name => "Addidas",
-                 :created_at => Time.now,
-                 :updated_at => Time.now})}
-     let (:merchants) {[merchant_1, merchant_2]}
-     let (:merchant_repo) {MerchantRepository.new(merchants)}
-     let (:sales_analyst) {SalesAnalyst.new(item_repo, merchant_repo)}
-     let (:item_1) {Item.new({:id => 1,
-       :name => "Shoes",
-       :description => "left shoe, right shoe",
-       :unit_price => BigDecimal(78.54,4),
-       :created_at => Time.now,
-       :updated_at => Time.now,
-       :merchant_id => 1})}
-     let (:item_2) {Item.new({:id => 2,
-        :name => "Cool hat",
-        :description => "black top hat",
-        :unit_price => BigDecimal(22.24,4),
-        :created_at => Time.now,
-        :updated_at => Time.now,
-        :merchant_id => 2})}
-     let (:item_3) {Item.new({:id => 3,
-        :name => "More Expensive Cool hat",
-        :description => "black top hat",
-        :unit_price => BigDecimal(32.44,4),
-        :created_at => Time.now,
-        :updated_at => Time.now,
-        :merchant_id => 2})}
-     let (:items) {[item_1, item_2, item_3]}
-     let (:item_repo) {ItemRepository.new(items)}
-     it 'will return array of merchants registered in that month' do
-       expect(sales_analyst.merchants_with_only_one_item_registered_in_month("November")).to eq([merchant_1])
-     end
-   end
+    it 'will return the total revenue for a single merchant' do 
+      expect(sales_analyst.revenue_by_merchant(1)).to eq(BigDecimal(392.7,4))
+   end 
   end
 end
