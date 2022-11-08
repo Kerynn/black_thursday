@@ -44,9 +44,7 @@ class SalesAnalyst
     end
     average = average_items_per_merchant
     differences = 0
-    merchants.map do |num|
-      differences += (num - average)**2
-    end
+    merchants.each { |num| differences += (num - average)**2 }
     Math.sqrt(differences / (merchants.count - 1).to_f).round(2)
   end
 
@@ -190,4 +188,34 @@ class SalesAnalyst
       items_per_merchant(merchant.id) == 1
     end
   end
+
+  def total_revenue_by_date(date) #yyyy-mm-dd
+    ii = @invoice_items.find_all_by_date(date)
+    ii.map do |invoice|
+      invoice.unit_price
+    end.sum.to_f.truncate(2)
+  end
+
+  def merchants_with_only_one_item_registered_in_month(month)
+   months_to_num = {"January" => 1,
+                     "February" => 2,
+                     "March" => 3,
+                     "April" => 4,
+                     "May" => 5,
+                     "June" => 6,
+                     "July" => 7,
+                     "August" => 8,
+                     "September" => 9,
+                     "October" => 10,
+                     "November" => 11,
+                     "December" => 12
+                     }
+   month_value = months_to_num[month]
+   invoices_in_month = @invoices.all.find_all {|invoice| invoice.created_at.month == month_value}
+   all_merchant_ids = invoices_in_month.map {|invoice| invoice.merchant_id}
+   one_item_merchants_ids = all_merchant_ids.select{|i| all_merchant_ids.count(i) == 1}
+   one_item_merchants_ids.map {|id| @merchants.find_by_id(id)}
+ end
+
+
 end
