@@ -267,5 +267,13 @@ RSpec.describe SalesAnalyst do
       expect(sales_analyst.invoice_paid_in_full?(2)).to eq(false)
       expect(sales_analyst.invoice_paid_in_full?(3)).to eq(false)
     end
+
+    it '#merchants_with_pending_invoices returns merchants with unsuccessful transactions' do
+      expect(sales_analyst.merchants_with_pending_invoices).to eq([merchant_1, merchant_2])
+    end
+
+    it '#merchants_with_only_one_item returns all merchants with only one item' do
+      expect(sales_analyst.merchants_with_only_one_item).to eq([merchant_1])
+    end
   end
 end

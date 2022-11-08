@@ -161,4 +161,17 @@ class SalesAnalyst
       return false
     end
   end
+
+  def merchants_with_pending_invoices
+    invoices_pending = @transactions.all.find_all do |transaction|
+      invoice_paid_in_full?(transaction.id) == false
+    end
+    invoices_pending
+  end
+
+  def merchants_with_only_one_item
+    single_item_merchant = @merchants.all.find_all do |merchant|
+      items_per_merchant(merchant.id) == 1
+    end
+  end
 end
