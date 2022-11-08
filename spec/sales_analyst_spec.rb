@@ -97,7 +97,7 @@ RSpec.describe SalesAnalyst do
   let (:transactions) {[transaction_1, transaction_2, transaction_3]}
   let (:transaction_repo) {TransactionRepository.new(transactions)}
   let (:sales_analyst) {SalesAnalyst.new(item_repo, merchant_repo, invoice_repo, invoice_item_repo, transaction_repo)}
-  
+
   describe 'iteration 1' do
     it 'exists' do
       expect(sales_analyst).to be_a(SalesAnalyst)
@@ -200,15 +200,12 @@ RSpec.describe SalesAnalyst do
       expect(sales_analyst.invoice_paid_in_full?(3)).to eq(false)
     end
 
-    it '#invoice_total returns the total $ of the invoice' do
-      expect(sales_analyst.invoice_total(1)).to eq(5 * BigDecimal(78.54,4))
-      expect(sales_analyst.invoice_total(2)).to eq(4 * BigDecimal(22.24,4))
-      expect(sales_analyst.invoice_total(3)).to eq(6 * BigDecimal(32.44,4))
+    it '#merchants_with_pending_invoices returns merchants with unsuccessful transactions' do
+      expect(sales_analyst.merchants_with_pending_invoices).to eq([merchant_1, merchant_2])
     end
-  end
-  describe 'iteration 4' do
-    it '#total_revenue_by_date' do
-      expect(sales_analyst.total_revenue_by_date("2022-11-07")).to eq(133.22)
+
+    it '#merchants_with_only_one_item returns all merchants with only one item' do
+      expect(sales_analyst.merchants_with_only_one_item).to eq([merchant_1])
     end
   end
 end
