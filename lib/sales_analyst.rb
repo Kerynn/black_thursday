@@ -217,9 +217,10 @@ class SalesAnalyst
                      "December" => 12
                      }
    month_value = months_to_num[month]
-   invoices_in_month = @invoices.all.find_all {|invoice| invoice.created_at.month == month_value}
-   all_merchant_ids = invoices_in_month.map {|invoice| invoice.merchant_id}
-   one_item_merchants_ids = all_merchant_ids.select{|i| all_merchant_ids.count(i) == 1}
-   one_item_merchants_ids.map {|id| @merchants.find_by_id(id)}
+   merchants_in_month = @merchants.all.find_all {|merchant| merchant.created_at.month == month_value}
+   merchants_with_one_item = merchants_in_month.find_all do |merchant|
+     items_per_merchant(merchant.id) == 1
+   end
  end
+ 
 end
