@@ -1,6 +1,4 @@
-require './spec_helper'
-require './lib/invoice_item'
-require './lib/invoice_item_repository'
+require './spec/spec_helper'
 
 RSpec.describe InvoiceItemRepository do
   let (:ii_1) {InvoiceItem.new({

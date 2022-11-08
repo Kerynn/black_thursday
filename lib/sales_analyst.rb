@@ -221,16 +221,39 @@ class SalesAnalyst
    merchants_with_one_item = merchants_in_month.find_all do |merchant|
      items_per_merchant(merchant.id) == 1
    end
- end
+  end
 
   def revenue_by_merchant(id)
-    merchant_invoices = @invoices.find_all_by_merchant_id(id) 
+    merchant_invoices = @invoices.find_all_by_merchant_id(id)
     total = 0
     merchant_invoices.each do |invoice|
       if invoice_paid_in_full?(invoice.id)
         total += invoice_total(invoice.id)
-      end 
-    end 
+      end
+    end
     total
-  end 
+  end
+
+  def top_revenue_earners(x = 20)
+    revenue_to_ids = {}
+    @merchants.all.each do |merchant|
+      revenue_to_ids[revenue_by_merchant(merchant.id)] = merchant.id
+    end
+    sorted_revenues = revenue_to_ids.keys.sort.reverse!.take(x)
+    top_earning_merchants = []
+    sorted_revenues.each do |revenue|
+      top_earning_merchants.push(@merchants.find_by_id(revenue_to_ids[revenue]))
+    end
+    top_earning_merchants
+  end
+
+  def total_revenue_by_date(date)
+    date = date.to_s
+    total_revenue_for_date = 0
+    date_invoices = @invoices.all.find_all {|invoice| invoice.created_at.to_s.include?(date)}
+    date_invoices.each do |invoice|
+      (total_revenue_for_date += invoice_total(invoice.id)) if invoice_paid_in_full?(invoice.id)
+    end
+    total_revenue_for_date
+  end
 end

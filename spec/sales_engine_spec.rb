@@ -1,5 +1,4 @@
-require './spec_helper'
-require './lib/sales_engine'
+require './spec/spec_helper'
 
 RSpec.describe SalesEngine do
   describe '#initialize' do

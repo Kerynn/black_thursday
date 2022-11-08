@@ -1,8 +1,7 @@
 require './spec/spec_helper'
-require './lib/transaction'
 
-RSpec.describe Transaction do 
-  describe '#initialize' do 
+RSpec.describe Transaction do
+  describe '#initialize' do
     let (:t) {Transaction.new({
       :id => 6,
       :invoice_id => 8,
@@ -12,8 +11,8 @@ RSpec.describe Transaction do
       :created_at => Time.now,
       :updated_at => Time.now
   })}
-  
-    it 'will exist and have attributes' do 
+
+    it 'will exist and have attributes' do
       expect(t).to be_a(Transaction)
       expect(t.id).to eq(6)
       expect(t.invoice_id).to eq(8)
@@ -24,8 +23,8 @@ RSpec.describe Transaction do
       expect(t.updated_at).to be_a(Time)
     end
   end
-  
-  describe '#update(attribute)' do 
+
+  describe '#update(attribute)' do
     let (:t) {Transaction.new({
       :id => 6,
       :invoice_id => 8,
@@ -35,19 +34,19 @@ RSpec.describe Transaction do
       :created_at => Time.now,
       :updated_at => Time.now
   })}
-    
+
     it 'can update :credit_card_number' do
       expect(t.credit_card_number).to eq("4242424242424242")
       t.update_credit_card_number("4068631943231473")
       expect(t.credit_card_number).to eq("4068631943231473")
     end
-    
+
     it 'can update :credit_card_expiration_date' do
       expect(t.credit_card_expiration_date).to eq("0220")
       t.update_credit_card_expiration_date("0217")
       expect(t.credit_card_expiration_date).to eq("0217")
     end
-    
+
     it 'can update :result' do
       expect(t.result).to eq("failed")
       t.update_result("success")
