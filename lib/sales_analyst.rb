@@ -256,4 +256,14 @@ class SalesAnalyst
     end
     total_revenue_for_date
   end
+
+  def most_sold_item_for_merchant(merchant_id)
+    merchant_invoices = @invoices.find_all_by_merchant_id(merchant_id)
+    merchant_invoices = merchant_invoices.find_all { |invoice| invoice_paid_in_full?(invoice.id)}
+    merchant_invoice_items = merchant_invoices.map { |invoice| @invoice_items.find_all_by_invoice_id(invoice.id)}.flatten
+    max_quantity_invoice_item = merchant_invoice_items.max_by { |invoice_item| invoice_item.quantity}
+    invoice_items_at_max = merchant_invoice_items.select { |invoice_item| invoice_item.quantity == max_quantity_invoice_item.quantity}
+    items_at_max_quantity = invoice_items_at_max.map { |invoice_item| @items.find_by_id(invoice_item.item_id)}
+  end
+
 end
