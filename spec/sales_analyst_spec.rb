@@ -1,4 +1,5 @@
 require './spec/spec_helper'
+require 'bigdecimal/util'
 
 RSpec.describe SalesAnalyst do
   let (:item_1) {Item.new({:id => 1,
@@ -25,9 +26,13 @@ RSpec.describe SalesAnalyst do
   let (:items) {[item_1, item_2, item_3]}
   let (:item_repo) {ItemRepository.new(items)}
   let (:merchant_1) {Merchant.new({:id => 1,
-                             :name => "Nike"})}
+                             :name => "Nike",
+                             :created_at => Time.now,
+                             :updated_at => Time.now})}
   let (:merchant_2) {Merchant.new({:id => 2,
-                             :name => "Addidas"})}
+                             :name => "Addidas",
+                             :created_at => Time.now,
+                             :updated_at => Time.now})}
   let (:merchants) {[merchant_1, merchant_2]}
   let (:merchant_repo) {MerchantRepository.new(merchants)}
   let (:invoice_1) {Invoice.new({:id => 1,
@@ -217,15 +222,15 @@ RSpec.describe SalesAnalyst do
 
   describe 'iteration 4' do
     it '#total_revenue_by_date' do
-      expect(sales_analyst.total_revenue_by_date(Time.now.to_s.split(" ")[0])).to eq(133.22)
+      expect(sales_analyst.total_revenue_by_date(Time.now.to_s.split(" ")[0])).to eq(0.3927e3)
     end
 
     it '#merchants_with_only_one_item_registered_in_month will return array of merchants registered in that month' do
        expect(sales_analyst.merchants_with_only_one_item_registered_in_month("November")).to eq([merchant_1])
-     end
-     
-    it 'will return the total revenue for a single merchant' do 
+    end
+
+    it 'will return the total revenue for a single merchant' do
       expect(sales_analyst.revenue_by_merchant(1)).to eq(BigDecimal(392.7,4))
-   end 
+    end
   end
 end

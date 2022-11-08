@@ -1,5 +1,4 @@
-require './spec_helper'
-require './lib/invoice_item'
+require './spec/spec_helper'
 
 RSpec.describe InvoiceItem do
   describe '#initialize' do

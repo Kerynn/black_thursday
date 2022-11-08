@@ -1,5 +1,4 @@
 require './spec/spec_helper'
-require './lib/transaction_repository'
 
 RSpec.describe TransactionRepository do
   describe 'iteration 3' do

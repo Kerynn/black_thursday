@@ -1,7 +1,5 @@
 require './spec/spec_helper'
 require 'bigdecimal/util'
-require './lib/item_repository'
-require './lib/item'
 
 RSpec.describe ItemRepository do
   let (:item_1) {Item.new({:id => 1,

@@ -1,6 +1,4 @@
 require './spec/spec_helper'
-require './lib/invoice'
-require './lib/invoice_repository'
 
 RSpec.describe InvoiceRepository do
   let (:invoice_1) {Invoice.new({
@@ -29,7 +27,7 @@ let (:invoice_3) {Invoice.new({
     :created_at  => Time.now,
     :updated_at  => Time.now
   })}
-  
+
   describe "#initialize" do
     it 'will exist' do
       invoices = [invoice_1, invoice_2]

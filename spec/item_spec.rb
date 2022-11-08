@@ -1,6 +1,5 @@
 require './spec/spec_helper'
 require 'bigdecimal/util'
-require './lib/item'
 
 RSpec.describe Item do
   describe "#intialize" do

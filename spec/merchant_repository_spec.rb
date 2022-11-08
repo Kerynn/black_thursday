@@ -1,6 +1,4 @@
-
-require './spec_helper'
-
+require './spec/spec_helper'
 
 RSpec.describe MerchantRepository do
   describe '#initialize' do
