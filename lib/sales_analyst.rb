@@ -117,7 +117,7 @@ class SalesAnalyst
     @merchants.all.find_all { |merchant| merchant_invoice_num(merchant.id) < threshold}
   end
 
-  def top_days_by_invoice_count
+  def num_to_weekday(num)
     num_to_days = {0 => "Sunday",
                    1 => "Monday",
                    2 => "Tuesday",
@@ -125,22 +125,34 @@ class SalesAnalyst
                    4 => "Thursday",
                    5 => "Friday",
                    6 => "Saturday"}
+    num_to_days[num]
+  end
+
+  def invoices_by_day
     invoice_days = invoices.all.map { |invoice| invoice.created_at.wday}
     invoices_by_day = Hash.new(0)
     invoice_days.each do |day|
       invoices_by_day[day] += 1
     end
-    invoice_average_per_day = (invoices_by_day.values.sum.to_f / invoices_by_day.values.count).round(2)
-    diff_sum = invoices_by_day.values.map { |invoices| (invoice_average_per_day - invoices)**2}.sum
-    invoice_stdrd_dev = Math.sqrt((diff_sum.to_f / invoices_by_day.values.count).abs).round(2)
+    invoices_by_day
+  end
+
+  def find_top_days(hash, threshold)
     days = []
-    threshold = invoice_average_per_day + invoice_stdrd_dev
-    invoices_by_day.each do |day, invoices|
+    hash.each do |day, invoices|
       if (invoices > threshold.round)
-        days.push(num_to_days[day])
+        days.push(num_to_weekday(day))
       end
     end
     days
+  end
+
+  def top_days_by_invoice_count
+    invoices_by_weekday = invoices_by_day
+    invoice_average_per_day = (invoices_by_weekday.values.sum.to_f / invoices_by_day.values.count).round(2)
+    diff_sum = invoices_by_weekday.values.map { |invoices| (invoice_average_per_day - invoices)**2}.sum
+    invoice_stdrd_dev = Math.sqrt((diff_sum.to_f / invoices_by_weekday.values.count).abs).round(2)
+    days = find_top_days(invoices_by_weekday, invoice_average_per_day + invoice_stdrd_dev)
   end
 
   def invoice_status(status)
@@ -154,16 +166,16 @@ class SalesAnalyst
   end
 
   def invoice_paid_in_full?(invoice_id)
-    transactions_by_invoice = @transactions.find_all_by_invoice_id(invoice_id)
-    transactions_by_invoice.any? do |transaction|
+    invoice_transactions = @transactions.find_all_by_invoice_id(invoice_id)
+    invoice_transactions.any? do |transaction|
       transaction.result == :success
     end
   end
 
-  def invoice_total(id)
-    total_price_by_quantity = @invoice_items.find_all_by_invoice_id(id).map do |invoice_item|
+  def invoice_total(invoice_id)
+    total_prices = @invoice_items.find_all_by_invoice_id(invoice_id).map do |invoice_item|
       invoice_item.unit_price * invoice_item.quantity
     end
-    total_price_by_quantity.sum
+    total_prices.sum
   end
 end
