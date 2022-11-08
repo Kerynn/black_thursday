@@ -178,4 +178,11 @@ class SalesAnalyst
     end
     total_prices.sum
   end
+  
+  def total_revenue_by_date(date) #yyyy-mm-dd
+    ii = @invoice_items.find_all_by_date(date)
+    ii.map do |invoice|
+      invoice.unit_price
+    end.sum.to_f.truncate(2)
+  end
 end
