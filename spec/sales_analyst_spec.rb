@@ -194,7 +194,7 @@ RSpec.describe SalesAnalyst do
   end
 
   describe 'iteration 3' do
-    xit '#invoice_paid_in_full? returns true if transaction is successful, false otherwise' do
+    it '#invoice_paid_in_full? returns true if transaction is successful, false otherwise' do
       expect(sales_analyst.invoice_paid_in_full?(1)).to eq(true)
       expect(sales_analyst.invoice_paid_in_full?(2)).to eq(false)
       expect(sales_analyst.invoice_paid_in_full?(3)).to eq(false)

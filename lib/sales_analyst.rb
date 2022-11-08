@@ -182,6 +182,5 @@ class SalesAnalyst
     single_item_merchant = @merchants.all.find_all do |merchant|
       items_per_merchant(merchant.id) == 1
     end
-
   end
 end
