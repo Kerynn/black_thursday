@@ -163,6 +163,10 @@ RSpec.describe SalesAnalyst do
       expect(sales_analyst.invoices_by_day).to eq({Time.now.wday => 3})
     end
 
+    it '#find_top_days returns an array of weekdays above the given threshold' do
+      expect(sales_analyst.find_top_days({0 => 12, 1 => 13, 2 => 4}, 5)).to eq(["Sunday", "Monday"])
+    end
+
     it '#top_days_by_invoice_count returns and array of days one standard deviation above the mean' do
       expect(sales_analyst.top_days_by_invoice_count).to eq([])
     end
