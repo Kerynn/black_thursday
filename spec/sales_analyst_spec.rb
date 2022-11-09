@@ -225,6 +225,12 @@ RSpec.describe SalesAnalyst do
       expect(sales_analyst.total_revenue_by_date(Time.now.to_s.split(" ")[0])).to eq(0.3927e3)
     end
 
+    it '#month_to_number returns a number corresponding with a month' do
+      expect(sales_analyst.month_to_number("January")).to eq(1)
+      expect(sales_analyst.month_to_number("December")).to eq(12)
+      expect(sales_analyst.month_to_number("Summer")).to eq(nil)
+    end
+
     it '#merchants_with_only_one_item_registered_in_month will return array of merchants registered in that month' do
        expect(sales_analyst.merchants_with_only_one_item_registered_in_month("November")).to eq([merchant_1])
     end

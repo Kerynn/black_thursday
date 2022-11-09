@@ -202,21 +202,24 @@ class SalesAnalyst
     end.sum.to_f.truncate(2)
   end
 
+  def month_to_number(month)
+    months_to_num = {"January" => 1,
+                      "February" => 2,
+                      "March" => 3,
+                      "April" => 4,
+                      "May" => 5,
+                      "June" => 6,
+                      "July" => 7,
+                      "August" => 8,
+                      "September" => 9,
+                      "October" => 10,
+                      "November" => 11,
+                      "December" => 12}
+    months_to_num[month]
+  end
+
   def merchants_with_only_one_item_registered_in_month(month)
-   months_to_num = {'January' => 1,
-                     'February' => 2,
-                     'March' => 3,
-                     'April' => 4,
-                     'May' => 5,
-                     'June' => 6,
-                     'July' => 7,
-                     'August' => 8,
-                     'September' => 9,
-                     'October' => 10,
-                     'November' => 11,
-                     'December' => 12
-                     }
-   month_value = months_to_num[month]
+   month_value = month_to_number(month)
    merchants_in_month = @merchants.all.find_all {|merchant| merchant.created_at.month == month_value}
    merchants_with_one_item = merchants_in_month.find_all do |merchant|
      items_per_merchant(merchant.id) == 1
