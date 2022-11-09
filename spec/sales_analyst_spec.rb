@@ -239,8 +239,8 @@ RSpec.describe SalesAnalyst do
     end
 
     it '#best_item_for_merchant returns the item that generated the most revenue for a given merchant' do
-      expect(sales_analyst.best_item_for_merchant(1)).to eq([item_1])
-      expect(sales_analyst.best_item_for_merchant(2)).to eq([])
+      expect(sales_analyst.best_item_for_merchant(1)).to eq(item_1)
+      expect(sales_analyst.best_item_for_merchant(2)).to eq(nil)
     end
   end
 end
