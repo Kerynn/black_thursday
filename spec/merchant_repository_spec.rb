@@ -7,38 +7,29 @@ RSpec.describe MerchantRepository do
                                  :name => 'Adidas'})}
   let(:merchants){[merchant_1, merchant_2]}
   let(:merchant_repository){MerchantRepository.new(merchants)}
-  describe '#initialize' do
-    it 'exists' do
+  
+  describe '#iteration 0' do
+    it '#initialize exists' do
       expect(merchant_repository).to be_a(MerchantRepository)
     end
-  end
-
-  describe '#all' do
-    it 'returns an array of all known merchants' do
+    
+    it '#all returns an array of all known merchants' do
       expect(merchant_repository.all).to eq([merchant_1, merchant_2])
     end
-  end
-
-  describe '#find_by_id' do
-    it 'finds and returns a merchant object by id' do
+    
+    it '#find_by_id returns a merchant object by id' do
       expect(merchant_repository.find_by_id(1)).to eq(merchant_1)
     end
-  end
-
-  describe '#find_by_name' do
-    it 'finds a merchant object with a case insensitve name search' do
+    
+    it '#find_by_name finds a merchant object with a case insensitve name search' do
       expect(merchant_repository.find_by_name('NIKE')).to eq(merchant_1)
     end
-  end
-
-  describe '#all_ids' do
-    it 'finds all ids' do
+    
+    it '#all_ids finds all ids' do
       expect(merchant_repository.all_ids).to eq([1, 2])
     end
-  end
-
-  describe '#find_all_by_name' do
-    it 'returns an array of all merchants with a specific case insensitve name' do
+    
+    it '#find_all_by_name returns an array of all merchants with a specific case insensitve name' do
       merchant_3 = Merchant.new({:id => 3,
                                  :name => 'Adidas'})
       merchants = [merchant_1, merchant_2, merchant_3]
@@ -46,10 +37,8 @@ RSpec.describe MerchantRepository do
 
       expect(merchant_repository.find_all_by_name('aDiDas')).to eq([merchant_2, merchant_3])
     end
-  end
-
-  describe '#create' do
-    it 'creates a new merchant with attributes' do
+    
+    it '#create creates a new merchant with attributes' do
       merchant_3 = merchant_repository.create({:name => 'Puma'})
       
       expect(merchant_3.name).to eq('Puma')
@@ -57,18 +46,14 @@ RSpec.describe MerchantRepository do
       expect(merchants).to eq([merchant_1, merchant_2, merchant_3])
       expect(merchant_repository.find_by_id(3)).to eq(merchant_3)
     end
-  end
-
-  describe '#update' do
-    it 'updates the name of a merchant with the given id' do
+    
+    it '#update updates the name of a merchant with the given id' do
       merchant_repository.update(1, {:id => 1, :name => 'Facebook'})
 
       expect(merchant_repository.find_by_id(1).name).to eq('Facebook')
     end
-  end
-
-  describe '#delete' do
-    it 'deletes a specific merchant from the repository' do
+    
+    it '#delete deletes a specific merchant from the repository' do
       merchant_repository.delete(1)
 
       expect(merchant_repository.all.include?(merchant_1)).to eq(false)
