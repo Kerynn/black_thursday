@@ -16,7 +16,7 @@ class CustomerRepository
   end
 
   def find_by_id(id)
-    @customers.find {|customer| customer.id == id}
+    @customers.find { |customer| customer.id == id}
   end
 
   def find_all_by_first_name(first_name)
@@ -44,11 +44,11 @@ class CustomerRepository
     if all_ids.include?(id)
       updated_customer = find_by_id(id)
         if attributes[:first_name] != nil 
-           updated_customer.update_first_name(attributes[:first_name])
+          updated_customer.update_first_name(attributes[:first_name])
         end 
 
         if attributes[:last_name] != nil
-           updated_customer.update_last_name(attributes[:last_name])
+          updated_customer.update_last_name(attributes[:last_name])
         end
         updated_customer.update_time
         updated_customer
