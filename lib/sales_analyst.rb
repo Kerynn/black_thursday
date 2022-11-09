@@ -116,13 +116,13 @@ class SalesAnalyst
   end
 
   def num_to_weekday(num)
-    num_to_days = {0 => "Sunday",
-                   1 => "Monday",
-                   2 => "Tuesday",
-                   3 => "Wednesday",
-                   4 => "Thursday",
-                   5 => "Friday",
-                   6 => "Saturday"}
+    num_to_days = {0 => 'Sunday',
+                   1 => 'Monday',
+                   2 => 'Tuesday',
+                   3 => 'Wednesday',
+                   4 => 'Thursday',
+                   5 => 'Friday',
+                   6 => 'Saturday'}
     num_to_days[num]
   end
 
@@ -203,18 +203,18 @@ class SalesAnalyst
   end
 
   def merchants_with_only_one_item_registered_in_month(month)
-   months_to_num = {"January" => 1,
-                     "February" => 2,
-                     "March" => 3,
-                     "April" => 4,
-                     "May" => 5,
-                     "June" => 6,
-                     "July" => 7,
-                     "August" => 8,
-                     "September" => 9,
-                     "October" => 10,
-                     "November" => 11,
-                     "December" => 12
+   months_to_num = {'January' => 1,
+                     'February' => 2,
+                     'March' => 3,
+                     'April' => 4,
+                     'May' => 5,
+                     'June' => 6,
+                     'July' => 7,
+                     'August' => 8,
+                     'September' => 9,
+                     'October' => 10,
+                     'November' => 11,
+                     'December' => 12
                      }
    month_value = months_to_num[month]
    merchants_in_month = @merchants.all.find_all {|merchant| merchant.created_at.month == month_value}
