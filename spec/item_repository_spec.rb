@@ -79,7 +79,6 @@ RSpec.describe ItemRepository do
   end
   
   it '#update the attributes of a specific item with the given change' do
-    
     item_repository.update(1, {:id => 1, :name => 'Sneakers'})
     expect(item_repository.find_by_id(1).name).to eq('Sneakers')
 
