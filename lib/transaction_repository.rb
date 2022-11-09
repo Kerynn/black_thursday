@@ -1,9 +1,8 @@
 require_relative 'transaction'
+require_relative 'repository'
 
-require_relative 'repo_module'
+class TransactionRepository  < Repository
 
-class TransactionRepository
-  include RepoModule
 
   attr_reader :transactions
 
@@ -17,10 +16,6 @@ class TransactionRepository
 
   def all
     @transactions
-  end
-
-  def find_by_id(id)
-    @transactions.find {|transaction| transaction.id == id}
   end
 
   def find_all_by_invoice_id(id)
@@ -43,9 +38,6 @@ class TransactionRepository
     new_transaction
   end
 
-  def delete(id)
-  end
-
   def update(id, attributes)
     if all_ids.include?(id)
       updated_t = find_by_id(id)
@@ -61,9 +53,5 @@ class TransactionRepository
       updated_t.update_time
       updated_t
     end
-  end
-
-  def delete(id)
-    @transactions.delete(find_by_id(id))
   end
 end
