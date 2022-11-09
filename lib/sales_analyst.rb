@@ -116,13 +116,13 @@ class SalesAnalyst
   end
 
   def num_to_weekday(num)
-    num_to_days = {0 => "Sunday",
-                   1 => "Monday",
-                   2 => "Tuesday",
-                   3 => "Wednesday",
-                   4 => "Thursday",
-                   5 => "Friday",
-                   6 => "Saturday"}
+    num_to_days = {0 => 'Sunday',
+                   1 => 'Monday',
+                   2 => 'Tuesday',
+                   3 => 'Wednesday',
+                   4 => 'Thursday',
+                   5 => 'Friday',
+                   6 => 'Saturday'}
     num_to_days[num]
   end
 

@@ -2,8 +2,7 @@ require './spec/spec_helper'
 
 RSpec.describe TransactionRepository do
   describe 'iteration 3' do
-    let (:t1) {Transaction.new({
-                                :id => 1,
+    let (:t1) {Transaction.new({:id => 1,
                                 :invoice_id => 2179,
                                 :credit_card_number => '4068631943231473',
                                 :credit_card_expiration_date => '0217',
@@ -11,8 +10,7 @@ RSpec.describe TransactionRepository do
                                 :created_at => Time.now,
                                 :updated_at => Time.now
                               })}
-    let (:t2) {Transaction.new({
-                                :id => 2,
+    let (:t2) {Transaction.new({:id => 2,
                                 :invoice_id => 46,
                                 :credit_card_number => '4068631943231473',
                                 :credit_card_expiration_date => '0813',
@@ -20,8 +18,7 @@ RSpec.describe TransactionRepository do
                                 :created_at => Time.now,
                                 :updated_at => Time.now
                               })}
-    let (:t3) {Transaction.new({
-                                :id => 3,
+    let (:t3) {Transaction.new({:id => 3,
                                 :invoice_id => 750,
                                 :credit_card_number => '4271805778010747',
                                 :credit_card_expiration_date => '1220',
@@ -29,8 +26,7 @@ RSpec.describe TransactionRepository do
                                 :created_at => Time.now,
                                 :updated_at => Time.now
                               })}
-    let (:t4) {Transaction.new({
-                                :id => 4,
+    let (:t4) {Transaction.new({:id => 4,
                                 :invoice_id => 4126,
                                 :credit_card_number => '4048033451067370',
                                 :credit_card_expiration_date => '0313',
@@ -81,7 +77,6 @@ RSpec.describe TransactionRepository do
     describe '#create(attributes)' do
       it 'will create a new instance of Transaction' do
         expect(t_repo.transactions).to eq([t1, t2, t3, t4])
-
         t5 = t_repo.create({:invoice_id => '3715',
                             :credit_card_number => '4297222478855497',
                             :credit_card_expiration_date => '1215',
@@ -100,7 +95,6 @@ RSpec.describe TransactionRepository do
         t_repo.update(4, {:credit_card_number => '4242424242424242',
                           :credit_card_expiration_date => '1225',
                           :result => 'success'})
-
         expect(t_repo.transactions[-1].credit_card_number).to eq('4242424242424242')
         expect(t_repo.transactions[-1].credit_card_expiration_date).to eq('1225')
         expect(t_repo.transactions[-1].result).to eq('success')
@@ -127,7 +121,6 @@ RSpec.describe TransactionRepository do
     describe '#delete(id)' do
       it 'deletes the transaction with the given id' do
         t_repo.delete(1)
-
         expect(t_repo.find_by_id(1)).to eq(nil)
       end
     end
