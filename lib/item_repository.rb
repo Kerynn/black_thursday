@@ -1,8 +1,7 @@
 require_relative 'item'
+require_relative 'repository'
 
-require_relative 'repo_module'
-class ItemRepository
-  include RepoModule
+class ItemRepository  < Repository
 
   def inspect
     "#<#{self.class} #{@items.size} rows>"

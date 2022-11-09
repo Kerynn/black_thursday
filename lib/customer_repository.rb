@@ -1,6 +1,7 @@
 require_relative 'customer'
+require_relative 'repository'
 
-class CustomerRepository
+class CustomerRepository  < Repository
   attr_reader :customers
 
   def inspect
@@ -13,10 +14,6 @@ class CustomerRepository
 
   def all
     @customers
-  end
-
-  def find_by_id(id)
-    @customers.find { |customer| customer.id == id}
   end
 
   def find_all_by_first_name(first_name)
@@ -36,17 +33,13 @@ class CustomerRepository
     new_customer
   end
 
-  def all_ids
-    ids = @customers.map { |customer| customer.id}
-  end
-
   def update(id, attributes)
     if all_ids.include?(id)
       updated_customer = find_by_id(id)
         if attributes[:first_name] != nil 
           updated_customer.update_first_name(attributes[:first_name])
         end 
-
+        
         if attributes[:last_name] != nil
           updated_customer.update_last_name(attributes[:last_name])
         end
@@ -54,10 +47,4 @@ class CustomerRepository
         updated_customer
     end
   end
-
-  def delete(customer_id)
-    if all_ids.include?(customer_id)
-      @customers.delete(find_by_id(customer_id))
-    end 
-  end 
 end

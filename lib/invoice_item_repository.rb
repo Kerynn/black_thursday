@@ -1,4 +1,5 @@
-class InvoiceItemRepository
+require_relative 'repository'
+class InvoiceItemRepository  < Repository
   attr_reader :invoiceitems
 
   def inspect
@@ -11,10 +12,6 @@ class InvoiceItemRepository
 
   def all
     @invoiceitems
-  end
-
-  def find_by_id(id)
-    @invoiceitems.find {|invoiceitem| invoiceitem.id == id}
   end
 
   def find_all_by_item_id(id)
@@ -33,10 +30,6 @@ class InvoiceItemRepository
     new_invoice_item
   end
 
-  def all_ids
-    ids = @invoiceitems.map { |invoiceitem| invoiceitem.id}
-  end
-
   def update(id, attributes)
     if all_ids.include?(id)
       updated_invoice_item = find_by_id(id)
@@ -51,10 +44,6 @@ class InvoiceItemRepository
     end
   end
 
-  def delete(id)
-    @invoiceitems.delete(find_by_id(id))
-  end
-  
   def find_all_by_date(date)
     @invoiceitems.find_all {|invoiceitem| invoiceitem.created_at.to_s.include?(date)}
   end
