@@ -25,19 +25,16 @@ RSpec.describe Invoice do
     
     it '#update_customer_id will update customer id' do
       i.update_customer_id(7)
-
       expect(i.customer_id).to eq(7)
     end
     
     it '#update_merchant_id will update merchant_id' do
       i.update_merchant_id(9)
-
       expect(i.merchant_id).to eq(9)
     end
     
     it '#update_status will update status' do
       i.update_status('paid')
-
       expect(i.status).to eq('paid')
     end
   end
