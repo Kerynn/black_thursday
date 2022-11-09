@@ -229,8 +229,18 @@ RSpec.describe SalesAnalyst do
        expect(sales_analyst.merchants_with_only_one_item_registered_in_month("November")).to eq([merchant_1])
     end
 
-    it 'will return the total revenue for a single merchant' do
+    it '#revenue_by_merchant will return the total revenue for a single merchant' do
       expect(sales_analyst.revenue_by_merchant(1)).to eq(BigDecimal(392.7,4))
+    end
+
+    it '#most_sold_item_for_merchant returns merchants most sold item' do
+      expect(sales_analyst.most_sold_item_for_merchant(1)).to eq([item_1])
+      expect(sales_analyst.most_sold_item_for_merchant(2)).to eq([])
+    end
+
+    it '#best_item_for_merchant returns the item that generated the most revenue for a given merchant' do
+      expect(sales_analyst.best_item_for_merchant(1)).to eq(item_1)
+      expect(sales_analyst.best_item_for_merchant(2)).to eq(nil)
     end
   end
 end
