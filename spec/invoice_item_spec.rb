@@ -3,10 +3,10 @@ require './spec/spec_helper'
 RSpec.describe InvoiceItem do
   describe '#initialize' do
     let (:ii) {InvoiceItem.new({
-                                :id => 6,
-                                :item_id => 7,
+                                :id         => 6,
+                                :item_id    => 7,
                                 :invoice_id => 8,
-                                :quantity => 1,
+                                :quantity   => 1,
                                 :unit_price => BigDecimal(10.99, 4),
                                 :created_at => "2022-11-04 10:18:47.464692 -0700",
                                 :updated_at => "2022-11-04 10:18:47.464692 -0700"
@@ -34,15 +34,14 @@ RSpec.describe InvoiceItem do
 
   describe '#update' do
     let (:ii) {InvoiceItem.new({
-                  :id => 3,
-                  :item_id => 9,
-                  :invoice_id => 1,
-                  :quantity => 2,
-                  :unit_price => BigDecimal(10.99, 4),
-                  :created_at => Time.now,
-                  :updated_at => Time.now
-                })}
-
+                                :id         => 3,
+                                :item_id    => 9,
+                                :invoice_id => 1,
+                                :quantity   => 2,
+                                :unit_price => BigDecimal(10.99, 4),
+                                :created_at => Time.now,
+                                :updated_at => Time.now
+                              })}
     it 'will update the invoice item quantity' do
       ii.update_quantity(5)
 
