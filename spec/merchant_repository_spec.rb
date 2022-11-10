@@ -1,10 +1,14 @@
 require './spec/spec_helper'
 
 RSpec.describe MerchantRepository do
-  let(:merchant_1){Merchant.new({:id => 1,
-                                 :name => 'Nike'})}
-  let(:merchant_2){Merchant.new({:id => 2,
-                                 :name => 'Adidas'})}
+  let(:merchant_1){Merchant.new({
+                                  :id   => 1,
+                                  :name => 'Nike'
+                                })}
+  let(:merchant_2){Merchant.new({
+                                  :id   => 2,
+                                  :name => 'Adidas'
+                                })}
   let(:merchants){[merchant_1, merchant_2]}
   let(:merchant_repository){MerchantRepository.new(merchants)}
   

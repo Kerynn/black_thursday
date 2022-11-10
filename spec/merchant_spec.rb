@@ -1,9 +1,10 @@
 require './spec/spec_helper'
 
 RSpec.describe Merchant do
-  let(:m){Merchant.new({:id => 5, 
+  let(:m){Merchant.new({
+                        :id   => 5, 
                         :name => 'Turing School'
-                        })}
+                      })}
   
   describe '#iteration 1' do
     it '#initialize exists and has readable attributes' do

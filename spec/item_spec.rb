@@ -2,13 +2,15 @@ require './spec/spec_helper'
 require 'bigdecimal/util'
 
 RSpec.describe Item do
-  let (:item) {Item.new({:id => 1,
-                         :name => 'item_name',
-                         :description => 'item_description' ,
-                         :unit_price => BigDecimal(10.99,4),
-                         :created_at => '2022-10-31 15:57:01.540729000 -0600',
-                         :updated_at => '2022-10-31 15:57:01.540729000 -0600',
-                         :merchant_id => 1})}
+  let (:item) {Item.new({
+                          :id          => 1,
+                          :name        => 'item_name',
+                          :description => 'item_description' ,
+                          :unit_price  => BigDecimal(10.99,4),
+                          :created_at  => '2022-10-31 15:57:01.540729000 -0600',
+                          :updated_at  => '2022-10-31 15:57:01.540729000 -0600',
+                          :merchant_id => 1
+                        })}
   describe '#iteration 0' do
     it '#initialize exists and creates readable attributes' do
       expect(item).to be_a(Item)

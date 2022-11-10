@@ -1,13 +1,14 @@
 require './spec/spec_helper'
 
 RSpec.describe Invoice do
-  let (:i){Invoice.new({:id          => 6,
+  let (:i){Invoice.new({
+                        :id          => 6,
                         :customer_id => 7,
                         :merchant_id => 8,
                         :status      => 'pending',
                         :created_at  => '2022-11-02 11:33:36.699596 -0600',
-                        :updated_at  =>  '2022-11-02 11:33:36.699596 -0600',
-                        })}
+                        :updated_at  =>  '2022-11-02 11:33:36.699596 -0600'
+                      })}
 
   describe '#initialize' do
     it 'will exist and have attributes' do
