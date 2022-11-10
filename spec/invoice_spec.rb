@@ -1,13 +1,15 @@
 require './spec/spec_helper'
 
 RSpec.describe Invoice do
-  let (:i){Invoice.new({:id          => 6,
+  let (:i){Invoice.new({
+                        :id          => 6,
                         :customer_id => 7,
                         :merchant_id => 8,
                         :status      => 'pending',
                         :created_at  => '2022-11-02 11:33:36.699596 -0600',
-                        :updated_at  =>  '2022-11-02 11:33:36.699596 -0600',
-                        })}
+                        :updated_at  => '2022-11-02 11:33:36.699596 -0600'
+                      })}
+  let (:original_time){i.created_at}
 
   describe '#initialize' do
     it 'will exist and have attributes' do
@@ -37,19 +39,10 @@ RSpec.describe Invoice do
       i.update_status('paid')
       expect(i.status).to eq('paid')
     end
-  end
-
-  describe '#update_time' do
-    it 'will update time' do
-      i = Invoice.new({:id          => 6,
-                       :customer_id => 7,
-                       :merchant_id => 8,
-                       :status      => 'pending',
-                       :created_at  => '2022-11-02 11:33:36.699596 -0600',
-                       :updated_at  => Time.now
-                      })
-      original_time = i.updated_at
-      expect(i.update_time).to be > original_time
+    
+    it '#update_time will update time' do
+      i.update_time
+      expect(i.update_time.to_s).to be > original_time
     end
   end
 end
